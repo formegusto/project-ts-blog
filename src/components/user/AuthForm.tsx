@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import useAuth from '../../lib/util/useAuth';
+import useInput from '../../lib/util/hooks/useInput';
 import Button from '../common/Button';
 
 const AuthFormBlock = styled.div`
@@ -39,15 +39,26 @@ type AuthFormProps = {
 }
 
 function AuthForm({type} : AuthFormProps) {
-    const { auth, onChange } = useAuth(type);
-    
+    const { input, onChange } = useInput(
+        (type === "login") ?
+        {
+            username: '',
+            password: '',
+        }
+        :
+        {
+            username: '',
+            password: '',
+            passwordConfirm: '',
+        });
+
     return (
         <AuthFormBlock>
             <h3>{type === "login" ? "로그인" : "회원가입"}</h3>
             <form>
-                <StyledInput value={auth.username} placeholder="아이디" name="username" onChange={onChange}/>
-                <StyledInput value={auth.password} placeholder="비밀번호" name="password" onChange={onChange}/>
-                {type === "register" && <StyledInput value={auth.passwordConfirm} placeholder="비밀번호 확인" name="passwordConfirm" onChange={onChange}/>}
+                <StyledInput value={input.username} placeholder="아이디" name="username" onChange={onChange}/>
+                <StyledInput value={input.password} placeholder="비밀번호" name="password" onChange={onChange}/>
+                {type === "register" && <StyledInput value={input.passwordConfirm} placeholder="비밀번호 확인" name="passwordConfirm" onChange={onChange}/>}
                 {(type === "login") ? 
                 <>
                         <Button fullWidth>로그인</Button>
