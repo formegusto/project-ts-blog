@@ -41,6 +41,7 @@ const StyledLink = styled(({fullWidth, ...parentProps}) => (
 `
 
 type ButtonProps = {
+    onClick?:  any;
     children: React.ReactNode;
     fullWidth?: boolean;
     to?: string;

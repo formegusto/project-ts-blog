@@ -7,8 +7,8 @@ export default function useInput(initState : any) {
     const input = useSelector((state: RootState) => state.input);
     const dispatch = useDispatch();
 
-    const onChange = useCallback((e) => {
-        dispatch(changeField(e.target))
+    const onChange = useCallback((target) => {
+        dispatch(changeField(target))
     }, [dispatch]);
 
     useEffect(() => {

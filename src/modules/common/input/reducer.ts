@@ -8,14 +8,13 @@ const initializeForm = {
 }
 
 const input = createReducer<DynamicInput,InputAction>(initializeForm, {
-    [CHANGE_FIELD] : (state, { payload: event }) => 
+    [CHANGE_FIELD] : (state, { payload: { name , value } }) => 
         produce(state, draft => {
-            console.log(state);
-            draft.form[event.name] = event.value
+            draft.form[name] = value
         }),
     [INITIALIZE_FORM] : (state, { payload: initializeForm }) =>
         produce(state,draft => {
-            draft.form = initializeForm 
+            draft.form = initializeForm
         }),
 });
 
